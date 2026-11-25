@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <title>Text-Based Mood Detection AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-badge">NLP & Deep Learning</div>
+      <h1 class="header-title">Text-Based Mood Detection AI</h1>
+      <p class="header-subtitle">Real-time NLP & Bidirectional LSTM Emotion Classifier</p>
+    </header>
+
+    <main class="main-content">
+      <section class="input-card">
+        <label for="moodInput" class="input-label">Enter text, chat message, or Hinglish phrase:</label>
+        <div class="textarea-wrapper">
+          <textarea
+            id="moodInput"
+            class="text-input"
+            rows="3"
+            placeholder="e.g. aaj khup mast vatat ahe, or I just aced my interview!"
+          ></textarea>
+          <button type="button" id="clearBtn" class="clear-btn" title="Clear input" style="display: none;">✕</button>
+        </div>
+
+        <div class="action-row">
+          <span class="shortcut-tip">Press Enter ↵ to analyze</span>
+          <button type="button" id="analyzeBtn" class="analyze-btn">
+            <span id="btnText">Analyze Mood ➔</span>
+          </button>
+        </div>
+
+        <div class="chips-section">
+          <span class="chips-label">Try realistic sample texts:</span>
+          <div class="chips-grid">
+            <button
+              type="button"
+              class="chip chip-happy"
+              data-text="aaj khup mast vatat ahe, finally got the promotion at work!"
+            >
+              <span class="chip-emoji">😊</span>
+              <span class="chip-badge">Happy:</span>
+              <span class="chip-snippet">aaj khup mast vatat ahe, finally got the promotion at work!</span>
+            </button>
+
+            <button
+              type="button"
+              class="chip chip-sad"
+              data-text="kuch samajh nahi aa raha, feeling so alone and defeated today"
+            >
+              <span class="chip-emoji">😢</span>
+              <span class="chip-badge">Sad:</span>
+              <span class="chip-snippet">kuch samajh nahi aa raha, feeling so alone and defeated today</span>
+            </button>
+
+            <button
+              type="button"
+              class="chip chip-angry"
+              data-text="dimag kharab mat kar mera, stop lying straight to my face!"
+            >
+              <span class="chip-emoji">😠</span>
+              <span class="chip-badge">Angry:</span>
+              <span class="chip-snippet">dimag kharab mat kar mera, stop lying straight to my face!</span>
+            </button>
+
+            <button
+              type="button"
+              class="chip chip-neutral"
+              data-text="The weekly team sync is scheduled tomorrow at 10 AM on Zoom."
+            >
+              <span class="chip-emoji">😐</span>
+              <span class="chip-badge">Neutral:</span>
+              <span class="chip-snippet">The weekly team sync is scheduled tomorrow at 10 AM on Zoom.</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div id="errorBanner" class="error-banner" style="display: none;">
+        <span class="error-icon">⚠️</span>
+        <div class="error-message">
+          <strong>Prediction Error</strong>
+          <p id="errorText"></p>
+        </div>
+      </div>
+
+      <section id="resultCard" class="result-card" style="display: none;">
+        <div class="result-header">
+          <div class="result-emoji-circle">
+            <span id="resultEmoji" class="result-emoji"></span>
+          </div>
+          <div class="result-title-group">
+            <div class="result-mood-label">Detected Emotion</div>
+            <h2 id="resultMoodName" class="result-mood-name"></h2>
+            <p id="resultTagline" class="result-tagline"></p>
+          </div>
+          <div class="confidence-pill">
+            <span class="confidence-label">Confidence</span>
+            <span id="resultConfidence" class="confidence-val"></span>
+          </div>
+        </div>
+
+        <div class="confidence-bar-container">
+          <div class="confidence-bar-track">
+            <div id="confidenceBarFill" class="confidence-bar-fill"></div>
+          </div>
+        </div>
+
+        <div id="probabilitiesSection" class="probabilities-section">
+          <h3 class="breakdown-title">Emotion Probability Breakdown</h3>
+          <div id="probabilitiesGrid" class="probabilities-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>Model: Bidirectional LSTM</span>
+      <span class="footer-dot">•</span>
+      <span>Vocabulary: 5,000</span>
+      <span class="footer-dot">•</span>
+      <span>Max Length: 30</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
